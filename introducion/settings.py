@@ -171,8 +171,12 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 # CORS
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:5173',
-    'http://127.0.0.1:5173',
-    'https://frontend-tdea-tendencias.vercel.app',  # <-- Tu URL exacta del front
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    '.vercel.app',
 ]
+
+if 'VERCEL_URL' in os.environ:
+    ALLOWED_HOSTS.append(os.environ.get('VERCEL_URL'))
+    ALLOWED_HOSTS.append(f".{os.environ.get('VERCEL_URL')}")
