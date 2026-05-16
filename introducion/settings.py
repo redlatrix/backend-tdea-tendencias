@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-+cem@zj1@cry8b@7n2tsmcg^@+y^&61xk_q7b5i^ejce1zpzbp
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['proyectoaula-tendencias20261.vercel.app', 'proyectoaula-tendencias20261-git-main-redlatrixs-projects.vercel.app']
+ALLOWED_HOSTS = ['*.vercel.app']
 
 
 # Application definition
@@ -170,6 +170,5 @@ STATIC_URL = 'static/'
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',
     'http://127.0.0.1:5173',
-    'proyectoaula-tendencias20261.vercel.app',
-    'proyectoaula-tendencias20261-git-main-redlatrixs-projects.vercel.app',
+    '*.vercel.app',
 ]
