@@ -2,7 +2,7 @@
   "version": 2,
   "builds": [
     {
-      "src": "introduccion/wsgi.py",
+      "src": "introducion/wsgi.py",
       "use": "@vercel/python",
       "config": { "maxLambdaSize": "15mb" }
     }
@@ -10,7 +10,7 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "introduccion/wsgi.py"
+      "dest": "introducion/wsgi.py"
     }
   ]
 }
