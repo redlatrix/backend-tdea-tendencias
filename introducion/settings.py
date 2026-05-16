@@ -14,9 +14,13 @@ from datetime import timedelta
 import os
 from pathlib import Path
 import dj_database_url
+from django.core.exceptions import ImproperlyConfigured
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+load_dotenv(BASE_DIR / '.env')
 
 
 # Quick-start development settings - unsuitable for production
@@ -127,17 +131,35 @@ TEMPLATES = [
 WSGI_APPLICATION = 'introducion.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/6.0/ref/settings/#databases
+# ==============================================================================
+# DATABASE CONFIGURATION
+# ==============================================================================
 
-DATABASES = {
-    'default': dj_database_url.config(
-        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
-        conn_max_age=600,
-        ssl_require=True if os.environ.get('DATABASE_URL') else False
-    )
-}
+DATABASE_URL = os.environ.get('DATABASE_URL')
 
+# Verificamos si estamos corriendo en el entorno de Vercel de forma más segura
+IS_VERCEL = 'VERCEL' in os.environ or 'VERCEL_URL' in os.environ
+
+if IS_VERCEL:
+    if not DATABASE_URL:
+        raise ImproperlyConfigured('CRITICAL: DATABASE_URL variable is missing in Vercel environment.')
+    
+    # En Vercel: Forzamos el uso estricto de la base de datos externa externa (PostgreSQL, etc.)
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=DATABASE_URL,
+            conn_max_age=600,
+            ssl_require=True
+        )
+    }
+else:
+    # Local/Desarrollo: Caemos de forma segura en SQLite local
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
 
