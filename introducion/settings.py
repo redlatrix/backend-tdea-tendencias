@@ -28,7 +28,11 @@ SECRET_KEY = 'django-insecure-+cem@zj1@cry8b@7n2tsmcg^@+y^&61xk_q7b5i^ejce1zpzbp
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app', 'http://localhost:3000']
+ALLOWED_HOSTS = [
+    '.vercel.app',
+    'localhost',
+    '127.0.0.1',
+]
 
 
 
@@ -171,8 +175,17 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 
-if 'VERCEL_URL' in os.environ:
-    ALLOWED_HOSTS.append(os.environ.get('VERCEL_URL'))
-    ALLOWED_HOSTS.append(f".{os.environ.get('VERCEL_URL')}")
+# if 'VERCEL_URL' in os.environ:
+#     ALLOWED_HOSTS.append(os.environ.get('VERCEL_URL'))
+#     ALLOWED_HOSTS.append(f".{os.environ.get('VERCEL_URL')}")
+
+CORS_ALLOWED_ORIGINS = [
+    'https://frontend-tdea-tendencias.onrender.com',
+    'https://frontend-tdea-tendencias.vercel.app',
+    'http://localhost:5173',
+    'http://127.0.0.1:5173',
+    'http://localhost:3000',
+    'http://127.0.0.1:3000',
+]
 
 CORS_ALLOW_CREDENTIALS = True
