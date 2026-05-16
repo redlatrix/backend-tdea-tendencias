@@ -94,10 +94,10 @@ SPECTACULAR_SETTINGS = {
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
+    'corsheaders.middleware.CorsMiddleware',  
+    'django.middleware.common.CommonMiddleware', 
     'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -180,3 +180,5 @@ ALLOWED_HOSTS = [
 if 'VERCEL_URL' in os.environ:
     ALLOWED_HOSTS.append(os.environ.get('VERCEL_URL'))
     ALLOWED_HOSTS.append(f".{os.environ.get('VERCEL_URL')}")
+
+CORS_ALLOW_CREDENTIALS = True
